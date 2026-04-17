@@ -7,8 +7,8 @@ import pygame
 RABBITMQ_HOST = "localhost"
 QUEUE_NAME = "turtle_commands"
 
-LINEAR_STEP = 2.0
-ANGULAR_STEP = 2.0
+LINEAR_STEP = 1.0
+ANGULAR_STEP = 1.0
 
 
 def create_channel():
@@ -48,13 +48,12 @@ def main():
         screen.fill((30, 30, 30))
 
         lines = [
-            "Стрелки: управление как в ROS/cmd_vel",
             "UP    -> вперед",
             "DOWN  -> назад",
             "LEFT  -> поворот влево",
             "RIGHT -> поворот вправо",
             "SPACE -> стоп",
-            "ESC   -> выход",
+            "ESC   -> выход"
         ]
 
         y = 20
