@@ -3,6 +3,7 @@ import math
 import threading
 import time
 from collections import deque
+from turtle_logic import TurtleFollowerLogic
 
 import pika
 import pygame
@@ -26,34 +27,6 @@ WORLD_MIN = 0.0
 WORLD_MAX_X = 11.0
 WORLD_MAX_Y = 11.0
 
-
-class TurtleFollowerLogic:
-    def __init__(self, max_speed=2.5, stop_distance=0.35):
-        self.max_speed = max_speed
-        self.stop_distance = stop_distance
-        self.k_linear = 2.0
-        self.k_angular = 4.5
-
-    def compute_cmd(self, curr_x, curr_y, curr_theta, tgt_x, tgt_y):
-        dx = tgt_x - curr_x
-        dy = tgt_y - curr_y
-        dist = math.hypot(dx, dy)
-
-        if dist < self.stop_distance:
-            return 0.0, 0.0
-
-        angle_to_target = math.atan2(dy, dx)
-        angle_error = angle_to_target - curr_theta
-
-        while angle_error > math.pi:
-            angle_error -= 2.0 * math.pi
-        while angle_error < -math.pi:
-            angle_error += 2.0 * math.pi
-
-        linear = min(self.max_speed, self.k_linear * dist)
-        angular = self.k_angular * angle_error
-
-        return linear, angular
 
 
 class Turtle:
